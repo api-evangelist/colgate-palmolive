@@ -12,7 +12,7 @@ tags:
   - Pet Nutrition
   - Retail
 type: Index
-x-type: company
+kind: company
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 access: 3rd-Party
 created: '2025-03-21'
@@ -42,7 +42,7 @@ common:
     url: https://jobs.colgate.com/
   - type: Suppliers
     url: https://www.colgatepalmolive.com/en-us/who-we-are/suppliers
-  - type: Privacy Policy
+  - type: PrivacyPolicy
     url: https://www.colgatepalmolive.com/en-us/privacy-policy
   - type: Terms of Use
     url: https://www.colgate.com/en-us/legal-privacy/terms-and-conditions-of-use
