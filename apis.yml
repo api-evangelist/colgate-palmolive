@@ -30,6 +30,10 @@ description: >-
   exposed as a developer API.
 apis: []
 common:
+  - type: GitHubOrganization
+    url: https://github.com/colpal
+  - type: LinkedIn
+    url: https://www.linkedin.com/company/colgate-palmolive
   - type: Website
     url: https://www.colgatepalmolive.com/
   - type: Investor Relations
