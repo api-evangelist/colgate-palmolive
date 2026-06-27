@@ -49,7 +49,7 @@ common:
     url: https://www.colgatepalmolive.com/en-us/who-we-are/suppliers
   - type: PrivacyPolicy
     url: https://www.colgatepalmolive.com/en-us/privacy-policy
-  - type: Terms of Use
+  - type: TermsOfService
     url: https://www.colgate.com/en-us/legal-privacy/terms-and-conditions-of-use
 maintainers:
   - FN: Kin Lane
