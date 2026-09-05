@@ -1,0 +1,132 @@
+generated: '2026-09-05'
+method: searched
+source: >-
+  Colgate-Palmolive publishes no machine-readable API contract, so nothing here
+  is derived from a spec. Every entry below is asserted or refuted from a
+  document the company itself publishes, or from a live probe recorded in this
+  repo. No standard is claimed on the strength of marketing prose.
+
+note: >-
+  REWARD-ONLY, AND MOSTLY EMPTY BY DESIGN. The API-side conformance vocabulary
+  (oauth2, oidc, rfc9457, json:api, pagination, idempotency, odata, scim, fapi)
+  is not applicable to a company with no public API — those are recorded as
+  conforms: false with the reason "no API surface", not as failures. The one
+  standard Colgate-Palmolive demonstrably meets is a security-operations one.
+
+conformance:
+  - id: rfc2350
+    name: RFC 2350 — Expectations for Computer Security Incident Response
+    conforms: true
+    evidence: https://github.com/colpal/csirt/blob/main/RFC2350.pdf
+    detail: >-
+      The CP CSIRT publishes a complete RFC 2350 team description (v1.2, revised
+      20 August 2025, TLP:CLEAR) covering all seven required sections: document
+      information, contact information, charter, policies, services, incident
+      reporting forms and disclaimers. The document is digitally signed with the
+      team's S/MIME certificate and accompanied by a SHA256 signature file, so a
+      reporter can verify authenticity before trusting the contact details.
+    verified: '2026-09-05'
+    artifact: security/colgate-palmolive-vulnerability-disclosure.yml
+
+  - id: rfc9116
+    name: RFC 9116 — security.txt
+    conforms: false
+    evidence: https://www.colgatepalmolive.com/.well-known/security.txt
+    detail: >-
+      No Colgate-Palmolive host serves a security.txt. The corporate host returns
+      HTTP 200 for the path but the body is a one-line HTML shell that redirects
+      to /lander; colgate.com, hillspet.com, palmolive.com and
+      colgateprofessional.com all return 404. This is a live gap the company
+      could close in minutes, because the intake it would point at
+      (csirt@colpal.com, plus the S/MIME certificate and RFC 2350 document at
+      github.com/colpal/csirt) already exists and is maintained.
+    verified: '2026-09-05'
+    artifact: well-known/colgate-palmolive-well-known.yml
+
+  - id: llmstxt
+    name: llms.txt
+    conforms: false
+    evidence: https://www.colgatepalmolive.com/llms.txt
+    detail: >-
+      The corporate robots.txt declares "LLM-Policy: /llms.txt" and the path
+      returns HTTP 200 text/plain, but the served body is GoDaddy aftermarket
+      parked-domain boilerplate describing a placeholder domain rather than
+      Colgate-Palmolive. A declared policy pointing at content about a different
+      subject does not conform.
+    verified: '2026-09-05'
+    artifact: well-known/colgate-palmolive-well-known.yml
+
+  - id: rfc8615
+    name: RFC 8615 — Well-Known URIs
+    conforms: false
+    evidence: https://www.colgatepalmolive.com/.well-known/api-catalog
+    detail: >-
+      No /.well-known document of any type is served on any of the seven
+      Colgate-Palmolive hosts probed. api-catalog, openid-configuration,
+      oauth-authorization-server, ai-plugin.json, agent-card.json and agent.json
+      all miss.
+    verified: '2026-09-05'
+    artifact: well-known/colgate-palmolive-well-known.yml
+
+  - id: dmarc
+    name: DMARC (RFC 7489)
+    conforms: true
+    evidence: 'DNS TXT _dmarc.colgatepalmolive.com — policy p=reject'
+    detail: >-
+      colgatepalmolive.com publishes both SPF and DMARC, and the DMARC policy is
+      the strictest available (p=reject) rather than none or quarantine. This
+      matters for a security program whose entire disclosure intake is an email
+      address: it makes csirt@colpal.com harder to spoof.
+    verified: '2026-09-05'
+    artifact: security/colgate-palmolive-domain-security.yml
+
+  - id: dnssec
+    name: DNSSEC
+    conforms: false
+    evidence: 'DNS query for colgatepalmolive.com — no DS/RRSIG records'
+    detail: colgatepalmolive.com is not DNSSEC-signed, and no CAA record is published.
+    verified: '2026-09-05'
+    artifact: security/colgate-palmolive-domain-security.yml
+
+  - id: tls13
+    name: TLS 1.3
+    conforms: true
+    evidence: 'TLS handshake with www.colgatepalmolive.com — TLSv1.3 negotiated'
+    detail: >-
+      The corporate host negotiates TLS 1.3. HSTS is not asserted on the
+      response, which is the one weak point in an otherwise current transport
+      posture.
+    verified: '2026-09-05'
+    artifact: security/colgate-palmolive-domain-security.yml
+
+domain_standards:
+  checked: true
+  found: false
+  detail: >-
+    The consumer-products / CPG sector's domain standards are the retail supply
+    chain ones — GS1 identifiers, GDSN product-data pools, and ANSI X12 or
+    EDIFACT message sets exchanged over AS2 or a VAN. Colgate-Palmolive is
+    certain to speak several of them as a Fortune 500 CPG manufacturer, and its
+    supplier and syndication footprint (Taulia, Tungsten eInvoicing, Syndigo and
+    Flywheel product-data syndication to Kroger, Ahold Delhaize USA, Publix and
+    others) is exactly where they would be used. NONE OF THAT IS RECORDED AS
+    CONFORMANCE, because domain_standard_conformance reads a contract that
+    declares the standard, and Colgate-Palmolive publishes no contract at all —
+    no EDI implementation guideline, no GS1 attribute mapping, no message
+    inventory. A trading partner learns the message set after a commercial
+    agreement, not from the public web. An honest miss on evidence, not a
+    finding that the company does not use these standards.
+  probed:
+    - standard: GS1 / GDSN
+      result: No public implementation guideline or attribute mapping found.
+    - standard: ANSI X12 / EDIFACT
+      result: >-
+        No public EDI trading-partner guideline, 850/810/856 implementation
+        guide, or AS2 connection profile published on any Colgate-Palmolive host.
+    - standard: OGC (WMS/WFS/OGC API)
+      result: Not applicable — no geospatial surface and no evidence pointing at one.
+    - standard: ISO 20022 / X12 financial
+      result: >-
+        Not applicable — invoicing runs through Tungsten and Taulia, third-party
+        platforms whose contracts belong to those vendors, not to
+        Colgate-Palmolive.

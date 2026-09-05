@@ -1,0 +1,39 @@
+generated: '2026-09-05'
+method: searched
+source: >-
+  Searched the Colgate-Palmolive corporate site, the brand hosts, the suppliers
+  section and the company's GitHub organization for any developer pricing,
+  plans, tiers or API access page on 2026-09-05. Probed
+  developer.colgatepalmolive.com and api.colgatepalmolive.com directly; neither
+  hostname resolves.
+
+plan_count: 0
+currency: null
+free_tier: false
+trial: false
+enterprise_only: false
+
+note: >-
+  An honest zero, and not the usual enterprise "contact us" kind. Colgate-Palmolive
+  publishes no public API, so there is no API product to price — no plans page
+  exists because there is nothing for one to sell. This is different from a
+  vendor who gates pricing behind a sales conversation: there is no
+  sales conversation to have about API access either. The company's commercial
+  integration surfaces (supplier onboarding through the Taulia portal and
+  Tungsten eInvoicing, retail product-data syndication through Syndigo and
+  Flywheel) are negotiated trading-partner relationships priced inside a
+  commercial agreement, and the platforms carrying them belong to those vendors
+  rather than to Colgate-Palmolive.
+
+plans: []
+
+evidence:
+  - url: https://developer.colgatepalmolive.com/
+    status: 0
+    note: Does not resolve (NXDOMAIN) — no developer portal to carry a pricing page.
+  - url: https://www.colgatepalmolive.com/en-us/suppliers
+    status: 200
+    note: >-
+      The only integration-onboarding page the company publishes. It routes to
+      third-party portals (portal.taulia.com, tungsten-network.com) and states no
+      pricing.

@@ -1,0 +1,165 @@
+generated: '2026-09-05'
+method: searched
+source: >-
+  Registry searches against PyPI (pypi.org/pypi/<pkg>/json), npm
+  (registry.npmjs.org) and the public GitHub API for the company's own verified
+  organization, github.com/colpal ("Colgate-Palmolive Company",
+  is_verified: true, 38 public repos). Versions and dates read from the GitHub
+  Releases and Git tag metadata endpoints on 2026-09-05.
+
+summary:
+  package_count: 6
+  official_count: 6
+  api_client_count: 0
+  note: >-
+    NONE OF THESE IS AN API CLIENT SDK. Colgate-Palmolive publishes no public
+    API (see apis.yml x-coverage), so there is nothing for a client library to
+    wrap. What the company does publish is internal platform tooling it chose to
+    open-source: one Python data-engineering library and a set of GitHub Actions
+    used by its own CI. They are recorded here because they are genuinely
+    first-party published software with real, dated releases — but NO `SDKs`
+    POINTER IS EMITTED in apis.yml, because sdk_count is a count of API client
+    libraries and these would inflate it with something a consumer of a
+    Colgate-Palmolive API could not use.
+
+registries_checked:
+  - registry: pypi
+    result: >-
+      No Colgate-Palmolive package. pypi.org/pypi/dataeng-container-tools/json
+      returns HTTP 404 — the library is published to GitHub Releases only, never
+      to PyPI, so `pip install dataeng-container-tools` from the public index
+      does not resolve.
+  - registry: npm
+    result: >-
+      No @colpal scope and no first-party package. registry.npmjs.org returns
+      "Not found" for @colpal/actions-pr-comment and @colpal/setup-yq. The
+      JavaScript repos in the org are GitHub Actions, consumed by `uses:` on a
+      git ref rather than installed from npm.
+  - registry: maven-central
+    result: No Colgate-Palmolive artifacts found.
+  - registry: nuget
+    result: No Colgate-Palmolive packages found.
+  - registry: rubygems
+    result: No Colgate-Palmolive gems found.
+  - registry: crates.io
+    result: No Colgate-Palmolive crates found.
+  - registry: packagist
+    result: No Colgate-Palmolive packages found.
+  - registry: pkg.go.dev
+    result: >-
+      No published module path. colpal/cp-tf-inspect is Go source with tagged
+      releases but is not documented as an importable module.
+
+packages:
+  - name: dataeng-container-tools
+    language: python
+    kind: library
+    purpose: >-
+      Tooling for Colgate-Palmolive's data-engineering containers — GCS and
+      Snowflake IO helpers, secret handling, and CLI argument plumbing for
+      containerized Airflow jobs.
+    official: true
+    api_client: false
+    registry: github-releases
+    version: v1.0.3
+    published: '2026-07-29'
+    repository: https://github.com/colpal/dataEng-container-tools
+    install: pip install git+https://github.com/colpal/dataEng-container-tools@v1.0.3
+    license: MIT
+    maintainer: CP DE Team <airflow_app_owners@colpal.com>
+    note: >-
+      The most actively maintained public artifact Colgate-Palmolive ships:
+      three releases in ten days in July 2026 and a Python floor of >=3.10.
+      Deliberately NOT on PyPI — pyproject.toml sets its `download` URL to the
+      repository's own releases page, so consumers install from a git ref. The
+      package name is unclaimed on PyPI, which is a supply-chain gap the company
+      may want to close defensively.
+
+  - name: colpal/actions-find-artifact-by-ref
+    language: javascript
+    kind: github-action
+    purpose: Locate a GitHub Actions build artifact by git ref.
+    official: true
+    api_client: false
+    registry: github-actions
+    version: v2.3.1
+    published: '2026-07-09'
+    repository: https://github.com/colpal/actions-find-artifact-by-ref
+    install: 'uses: colpal/actions-find-artifact-by-ref@v2.3.1'
+    note: Most recently pushed action in the org (2026-09-02).
+
+  - name: colpal/setup-yq
+    language: typescript
+    kind: github-action
+    purpose: Initialize the yq binary within a GitHub Actions runner.
+    official: true
+    api_client: false
+    registry: github-actions
+    version: v2.0.0
+    published: '2026-06-05'
+    repository: https://github.com/colpal/setup-yq
+    install: 'uses: colpal/setup-yq@v2'
+    note: >-
+      No GitHub Release object; version and date read from the v2.0.0 git tag.
+      Also carries a floating v2 tag, so a consumer pinning @v2 cannot tell which
+      build they get.
+
+  - name: colpal/actions-pr-comment
+    language: javascript
+    kind: github-action
+    purpose: Create, update and hide comments on pull requests.
+    official: true
+    api_client: false
+    registry: github-actions
+    version: v1.4.0
+    published: '2026-05-07'
+    repository: https://github.com/colpal/actions-pr-comment
+    install: 'uses: colpal/actions-pr-comment@v1.4.0'
+
+  - name: colpal/actions-is-first-run
+    language: javascript
+    kind: github-action
+    purpose: Detect whether a workflow is executing for the first time.
+    official: true
+    api_client: false
+    registry: github-actions
+    version: v1.0.13
+    published: '2026-03-05'
+    repository: https://github.com/colpal/actions-is-first-run
+    install: 'uses: colpal/actions-is-first-run@v1.0.13'
+    note: No GitHub Release object; date read from the v1.0.13 tag commit.
+
+  - name: colpal/actions-clean
+    language: shell
+    kind: github-action
+    purpose: Clean the workspace on a self-hosted GitHub Actions runner.
+    official: true
+    api_client: false
+    registry: github-actions
+    version: v1.1.1
+    published: '2022-05-20'
+    repository: https://github.com/colpal/actions-clean
+    install: 'uses: colpal/actions-clean@v1.1.1'
+    note: >-
+      Last tagged 2022; repository last pushed 2023-08-15. Still public and
+      unarchived, but effectively dormant.
+
+not_recorded:
+  - name: colpal/techradar2json
+    reason: >-
+      Real first-party repo (v2.0.0, 2025-04-01) but a one-off conversion
+      utility with no distribution channel — no registry entry, no action
+      metadata, no documented install.
+  - name: colpal/cp-tf-inspect
+    reason: >-
+      Go source with tagged releases (v1.0.2, 2025-12-23) but no published
+      module path or documented consumer install path.
+  - name: colpal/gigya
+    reason: >-
+      ARCHIVED fork of SAP/Gigya's own JavaScript REST SDK, not
+      Colgate-Palmolive software. Recording it would credit Colgate with a
+      vendor's client library.
+  - name: colpal/bitnami-charts, colpal/marquez-fork, colpal/infracost-cloud-pricing-api, colpal/airfloss
+    reason: >-
+      Forks of third-party open-source projects (Bitnami, Marquez, Infracost,
+      Apache Airflow). Upstream software, not Colgate-Palmolive packages.

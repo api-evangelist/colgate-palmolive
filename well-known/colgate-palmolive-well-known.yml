@@ -1,0 +1,332 @@
+generated: '2026-09-05'
+method: probed
+source: >-
+  Live HTTP probes of every host this record knows — the registrable corporate
+  domain and www, the consumer brand hosts (colgate.com, hillspet.com,
+  palmolive.com, colgateprofessional.com), the careers host and the investor
+  host. Colgate-Palmolive publishes no API, so there is no baseURL host and no
+  OpenAPI servers[] host to probe. All Colgate web properties sit behind Akamai;
+  probes that returned 403 "Access Denied" were re-fetched with a full browser
+  navigation header set (User-Agent, Accept, Sec-Fetch-*), and the status
+  recorded below is the one that header set produced.
+
+summary:
+  documents_served: 0
+  note: >-
+    No /.well-known document of any kind is served on any Colgate-Palmolive
+    host. NO WellKnown OR SecurityTxt POINTER IS EMITTED in apis.yml: every
+    probed path either 404s or returns an HTML shell. This file records a
+    measured absence, not a presence.
+
+findings:
+  - id: llms-txt-serves-parked-domain-boilerplate
+    severity: notable
+    host: www.colgatepalmolive.com
+    detail: >-
+      The corporate robots.txt declares "LLM-Policy: /llms.txt", pointing agents
+      at an llms.txt the site does serve (HTTP 200, text/plain). The body is not
+      about Colgate-Palmolive at all — it is GoDaddy aftermarket parked-domain
+      boilerplate for a placeholder domain ("# dummy.com ... currently listed for
+      sale on GoDaddy's aftermarket"). The same host's /.well-known/security.txt
+      returns HTTP 200 with a one-line HTML shell that JavaScript-redirects to
+      "/lander", the same parked-page pattern. Both look like template content
+      that shipped to production. An agent following Colgate's own declared LLM
+      policy is told the company's domain is for sale.
+    evidence:
+      - url: https://www.colgatepalmolive.com/robots.txt
+        status: 200
+        file: well-known/colgate-palmolive-robots.txt
+      - url: https://www.colgatepalmolive.com/llms.txt
+        status: 200
+        file: well-known/colgate-palmolive-llms-txt-served.txt
+      - url: https://www.colgatepalmolive.com/.well-known/security.txt
+        status: 200
+    consequence: >-
+      Because the served llms.txt describes a different (placeholder) subject, it
+      is treated as a MISS, not as a published LLMsTxt. The LLMsTxt pointer in
+      apis.yml resolves to llms/colgate-palmolive-llms.txt, which API Evangelist
+      generated from this repo and which is marked method: generated. Colgate's
+      own file is preserved here verbatim as evidence only.
+    provider_action: >-
+      Replace /llms.txt with real content describing colgatepalmolive.com, or
+      remove the LLM-Policy line from robots.txt. Replace or remove the
+      /.well-known/security.txt lander shell and point it at the CP CSIRT intake
+      (csirt@colpal.com, github.com/colpal/csirt) that already exists.
+
+hosts:
+  - host: www.colgatepalmolive.com
+    role: registrable domain (www) — corporate site
+    documents:
+      - path: /.well-known/security.txt
+        status: 200
+        file: null
+        note: >-
+          HTML shell that JS-redirects to /lander — not a security.txt document.
+          Treated as a miss. Colgate's real disclosure intake is the CP CSIRT
+          RFC 2350 document at github.com/colpal/csirt, which this file is not.
+      - path: /.well-known/openid-configuration
+        status: 403
+        file: null
+        note: Akamai "Access Denied"; no document.
+      - path: /.well-known/oauth-authorization-server
+        status: 403
+        file: null
+        note: Akamai "Access Denied"; no document.
+      - path: /.well-known/api-catalog
+        status: 403
+        file: null
+        note: Akamai "Access Denied"; no document.
+      - path: /.well-known/ai-plugin.json
+        status: 403
+        file: null
+        note: Akamai "Access Denied"; no document.
+      - path: /.well-known/agent-card.json
+        status: 403
+        file: null
+        note: Akamai "Access Denied"; no A2A agent card.
+      - path: /.well-known/agent.json
+        status: 403
+        file: null
+        note: Legacy pre-0.3 agent card path; Akamai "Access Denied"; no card.
+      - path: /llms.txt
+        status: 200
+        file: well-known/colgate-palmolive-llms-txt-served.txt
+        note: >-
+          Served, but the body is GoDaddy parked-domain boilerplate about
+          "dummy.com" — not a description of Colgate-Palmolive. See findings[].
+          Counted as a miss.
+      - path: /robots.txt
+        status: 200
+        file: well-known/colgate-palmolive-robots.txt
+        note: >-
+          Declares "LLM-Policy: /llms.txt". Saved because it is the pointer that
+          makes the llms.txt finding a stated policy rather than a stray file.
+      - path: /openapi.json
+        status: 403
+        file: null
+        note: No OpenAPI on the corporate host.
+
+  - host: colgatepalmolive.com
+    role: registrable domain (apex)
+    documents:
+      - path: /
+        status: 301
+        file: null
+        note: Apex redirects to https://www.colgatepalmolive.com/; probed via www above.
+
+  - host: www.colgate.com
+    role: consumer brand host (Colgate)
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+        file: null
+      - path: /.well-known/openid-configuration
+        status: 403
+        file: null
+      - path: /.well-known/oauth-authorization-server
+        status: 403
+        file: null
+      - path: /.well-known/api-catalog
+        status: 403
+        file: null
+      - path: /.well-known/ai-plugin.json
+        status: 403
+        file: null
+      - path: /.well-known/agent-card.json
+        status: 403
+        file: null
+      - path: /.well-known/agent.json
+        status: 403
+        file: null
+      - path: /llms.txt
+        status: 403
+        file: null
+      - path: /openapi.json
+        status: 403
+        file: null
+
+  - host: www.hillspet.com
+    role: subsidiary brand host (Hill's Pet Nutrition)
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+        file: null
+      - path: /.well-known/openid-configuration
+        status: 403
+        file: null
+      - path: /.well-known/oauth-authorization-server
+        status: 403
+        file: null
+      - path: /.well-known/api-catalog
+        status: 403
+        file: null
+      - path: /.well-known/ai-plugin.json
+        status: 403
+        file: null
+      - path: /.well-known/agent-card.json
+        status: 403
+        file: null
+      - path: /.well-known/agent.json
+        status: 403
+        file: null
+      - path: /llms.txt
+        status: 404
+        file: null
+      - path: /openapi.json
+        status: 403
+        file: null
+
+  - host: www.colgateprofessional.com
+    role: professional/dental-practitioner brand host
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+        file: null
+      - path: /.well-known/openid-configuration
+        status: 403
+        file: null
+      - path: /.well-known/oauth-authorization-server
+        status: 403
+        file: null
+      - path: /.well-known/api-catalog
+        status: 403
+        file: null
+      - path: /.well-known/ai-plugin.json
+        status: 403
+        file: null
+      - path: /.well-known/agent-card.json
+        status: 403
+        file: null
+      - path: /.well-known/agent.json
+        status: 403
+        file: null
+      - path: /llms.txt
+        status: 404
+        file: null
+      - path: /openapi.json
+        status: 403
+        file: null
+
+  - host: www.palmolive.com
+    role: consumer brand host (Palmolive)
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+        file: null
+      - path: /.well-known/openid-configuration
+        status: 403
+        file: null
+      - path: /.well-known/oauth-authorization-server
+        status: 403
+        file: null
+      - path: /.well-known/api-catalog
+        status: 403
+        file: null
+      - path: /.well-known/ai-plugin.json
+        status: 403
+        file: null
+      - path: /.well-known/agent-card.json
+        status: 403
+        file: null
+      - path: /.well-known/agent.json
+        status: 403
+        file: null
+      - path: /llms.txt
+        status: 404
+        file: null
+      - path: /openapi.json
+        status: 403
+        file: null
+
+  - host: investor.colgatepalmolive.com
+    role: investor relations host (third-party IR platform)
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+        file: null
+      - path: /.well-known/openid-configuration
+        status: 404
+        file: null
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+        file: null
+      - path: /.well-known/api-catalog
+        status: 404
+        file: null
+      - path: /.well-known/ai-plugin.json
+        status: 403
+        file: null
+      - path: /.well-known/agent-card.json
+        status: 403
+        file: null
+      - path: /.well-known/agent.json
+        status: 403
+        file: null
+      - path: /llms.txt
+        status: 404
+        file: null
+      - path: /openapi.json
+        status: 403
+        file: null
+
+  - host: jobs.colgate.com
+    role: careers host (Phenom People SPA)
+    documents:
+      - path: /.well-known/security.txt
+        status: 200
+        file: null
+        note: >-
+          SPA CATCH-ALL — every path under this host returns HTTP 200 with the
+          same 41KB careers-page HTML, including /.well-known/agent-card.json and
+          /openapi.json. No document is served. Every entry below is a miss and
+          none of these 200s is credited.
+      - path: /.well-known/openid-configuration
+        status: 200
+        file: null
+        note: SPA catch-all HTML; not a document.
+      - path: /.well-known/oauth-authorization-server
+        status: 200
+        file: null
+        note: SPA catch-all HTML; not a document.
+      - path: /.well-known/api-catalog
+        status: 200
+        file: null
+        note: SPA catch-all HTML; not a document.
+      - path: /.well-known/ai-plugin.json
+        status: 200
+        file: null
+        note: SPA catch-all HTML; not a document.
+      - path: /.well-known/agent-card.json
+        status: 200
+        file: null
+        note: >-
+          SPA catch-all HTML; NOT an A2A agent card. Body does not parse as JSON
+          and carries none of the AgentCard keys. No AgentCard pointer emitted.
+      - path: /.well-known/agent.json
+        status: 200
+        file: null
+        note: SPA catch-all HTML; not a legacy agent card.
+      - path: /llms.txt
+        status: 200
+        file: null
+        note: SPA catch-all HTML; not an llms.txt.
+      - path: /openapi.json
+        status: 200
+        file: null
+        note: SPA catch-all HTML; does not parse as OpenAPI.
+
+  - host: developer.colgatepalmolive.com
+    role: probed developer-portal candidate
+    documents:
+      - path: /
+        status: 0
+        file: null
+        note: Host does not resolve (NXDOMAIN). No developer portal exists.
+
+  - host: api.colgatepalmolive.com
+    role: probed API-host candidate
+    documents:
+      - path: /
+        status: 0
+        file: null
+        note: Host does not resolve (NXDOMAIN). No API host exists.

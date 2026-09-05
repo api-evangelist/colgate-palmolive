@@ -39,7 +39,7 @@ accessModel:
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/colgate-palmolive.png
 access: 3rd-Party
 created: '2025-03-21'
-modified: '2026-04-28'
+modified: '2026-09-05'
 position: Consuming
 description: >-
   Colgate-Palmolive Company is a global consumer-products manufacturer
@@ -61,21 +61,64 @@ common:
     url: https://www.linkedin.com/company/colgate-palmolive
   - type: Website
     url: https://www.colgatepalmolive.com/
-  - type: Investor Relations
+  - type: InvestorRelations
     url: https://investor.colgatepalmolive.com/
   - type: Sustainability
     url: https://www.colgatepalmolive.com/en-us/sustainability
-  - type: Hill's Pet Nutrition
+  - type: Website
     url: https://www.hillspet.com/
   - type: Careers
     url: https://jobs.colgate.com/
-  - type: Suppliers
-    url: https://www.colgatepalmolive.com/en-us/who-we-are/suppliers
+  - type: Partners
+    url: https://www.colgatepalmolive.com/en-us/suppliers
   - type: PrivacyPolicy
-    url: https://www.colgatepalmolive.com/en-us/privacy-policy
+    url: https://www.colgatepalmolive.com/en-us/legal-privacy-policy
   - type: TermsOfService
-    url: https://www.colgate.com/en-us/legal-privacy/terms-and-conditions-of-use
+    url: https://www.colgatepalmolive.com/en-us/legal-privacy-policy/terms-of-use
+  - type: VulnerabilityDisclosure
+    url: security/colgate-palmolive-vulnerability-disclosure.yml
+  - type: Security
+    url: security/colgate-palmolive-vulnerability-disclosure.yml
+  - type: Conformance
+    url: conformance/colgate-palmolive-conformance.yml
+  - type: Packages
+    url: packages/colgate-palmolive-packages.yml
+  - type: LLMsTxt
+    url: llms/colgate-palmolive-llms.txt
+  - type: Plans
+    url: plans/colgate-palmolive-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/colgate-palmolive-rate-limits.yml
+  - type: Blog
+    url: https://www.colgatepalmolive.com/en-us/news
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
 specificationVersion: '0.23'
+
+x-enrichment:
+  date: '2026-09-05'
+  status: enriched
+  artifacts_added: 11
+  pass: local-v3
+x-coverage:
+  state: none
+  reason: no-developer-program
+  detail: >-
+    Colgate-Palmolive ships consumer products, not software: developer.colgatepalmolive.com
+    and api.colgatepalmolive.com do not resolve at all, and no OpenAPI, GraphQL, AsyncAPI,
+    .proto or WSDL exists on any of its seven public hosts or in its own verified GitHub
+    org (github.com/colpal, 38 public repos, all internal CI tooling). Its real
+    machine-to-machine footprint is retail EDI and supplier onboarding routed to
+    third-party platforms (Taulia, Tungsten), which belong to those vendors rather than
+    to Colgate-Palmolive.
+  evidence:
+    - url: https://developer.colgatepalmolive.com/
+      status: 0
+    - url: https://api.colgatepalmolive.com/
+      status: 0
+    - url: https://www.colgatepalmolive.com/openapi.json
+      status: 403
+    - url: https://www.colgatepalmolive.com/.well-known/api-catalog
+      status: 403
+  checked: '2026-09-05'

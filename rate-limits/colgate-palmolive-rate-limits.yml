@@ -1,0 +1,34 @@
+generated: '2026-09-05'
+method: searched
+source: >-
+  Searched every Colgate-Palmolive public host and the company's GitHub
+  organization for documented API rate limits, quotas, throttling behaviour or
+  429 semantics on 2026-09-05. No developer documentation of any kind exists.
+
+limit_count: 0
+headers: []
+exhaustion_status: null
+retry_after: false
+
+note: >-
+  An honest zero. There is no public Colgate-Palmolive API, therefore no
+  published rate limits, no RateLimit-* or X-RateLimit-* response headers, and
+  no documented 429 behaviour. Nothing was observed on a live response either,
+  because there is no endpoint to observe. The only rate-limiting behaviour
+  encountered anywhere on the company's surface is the Akamai edge policy in
+  front of its marketing sites, which returns HTTP 403 "Access Denied" to
+  non-browser clients and to browser-shaped clients that make requests too
+  quickly. That is ordinary bot management on a consumer web property, not an
+  API rate limit, and it is deliberately NOT recorded as one.
+
+limits: []
+
+evidence:
+  - url: https://www.colgatepalmolive.com/openapi.json
+    status: 403
+    note: >-
+      Akamai edge denial, not a rate-limit document. No OpenAPI is served on this
+      or any other Colgate-Palmolive host.
+  - url: https://api.colgatepalmolive.com/
+    status: 0
+    note: Does not resolve (NXDOMAIN) — no API host whose limits could be published.
