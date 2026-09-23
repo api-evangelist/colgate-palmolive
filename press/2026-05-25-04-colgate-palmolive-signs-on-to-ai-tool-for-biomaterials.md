@@ -1,7 +1,9 @@
 ---
 title: Colgate-Palmolive signs on to AI tool for biomaterials ...
 url: https://www.packagingdive.com/news/erthos-colgate-palmolive-zya-ai-platform-biomaterials-development/759412/
-date: '2026-05-25'
+published: ''
+date_basis: harvested
+harvested: '2026-05-25'
 query: '"Colgate-Palmolive" press release artificial intelligence'
 position: 4
 source: serpapi-google

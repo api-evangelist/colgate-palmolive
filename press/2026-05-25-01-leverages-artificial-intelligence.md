@@ -1,7 +1,9 @@
 ---
 title: Leverages Artificial Intelligence
 url: https://www.colgatepalmolive.com/en-us/who-we-are/our-policies/artificial-intelligence-policy
-date: '2026-05-25'
+published: ''
+date_basis: harvested
+harvested: '2026-05-25'
 query: '"Colgate-Palmolive" press release artificial intelligence'
 position: 1
 source: serpapi-google

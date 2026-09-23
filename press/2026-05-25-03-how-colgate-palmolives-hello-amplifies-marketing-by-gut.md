@@ -1,7 +1,9 @@
 ---
 title: How Colgate-Palmolive's Hello amplifies marketing by gut- ...
 url: https://www.marketingdive.com/news/how-colgate-palmolives-hello-amplifies-marketing-by-gut-checking-ai/802878/
-date: '2026-05-25'
+published: ''
+date_basis: harvested
+harvested: '2026-05-25'
 query: '"Colgate-Palmolive" press release artificial intelligence'
 position: 3
 source: serpapi-google
