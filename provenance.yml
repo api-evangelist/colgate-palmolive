@@ -5,6 +5,12 @@ artifacts:
   conformance/colgate-palmolive-conformance.yml:
     method: searched
     evidence: declared in the artifact
+  data-license/colgate-palmolive-data-license.yml:
+    method: harvested
+    evidence: declared in the artifact
+  eligibility/colgate-palmolive-eligibility.yml:
+    method: harvested
+    evidence: declared in the artifact
   front-door-ai/2026-09-17.yml:
     method: unknown
     evidence: no authorship recorded
@@ -14,10 +20,13 @@ artifacts:
   heartbeat/2026-11-06.yml:
     method: unknown
     evidence: no authorship recorded
+  heartbeat/2026-11-13.yml:
+    method: unknown
+    evidence: no authorship recorded
   kin/checks-2026-10-23T222754.yml:
     method: generated
     evidence: Kin Score snapshot written by score.rb
-  kin/checks-2026-11-02T082323.yml:
+  kin/checks-2026-11-06T143934.yml:
     method: generated
     evidence: Kin Score snapshot written by score.rb
   kin/score-2026-09-23T000603.yml:
@@ -83,6 +92,9 @@ artifacts:
   kin/score-2026-11-02T082323.yml:
     method: generated
     evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-11-06T143934.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
   llms/colgate-palmolive-llms.txt:
     method: generated
     evidence: carries an API Evangelist house phrase
@@ -107,6 +119,9 @@ artifacts:
   press/2026-05-25-05-how-colgate-leverages-ai-and-big-data.md:
     method: unknown
     evidence: no authorship recorded
+  privacy/colgate-palmolive-privacy-policy.yml:
+    method: harvested
+    evidence: declared in the artifact
   rate-limits/colgate-palmolive-rate-limits.yml:
     method: searched
     evidence: declared in the artifact
@@ -136,6 +151,9 @@ artifacts:
     evidence: no authorship recorded
   security/colgate-palmolive-vulnerability-disclosure.yml:
     method: searched
+    evidence: declared in the artifact
+  terms/colgate-palmolive-terms-of-service.yml:
+    method: harvested
     evidence: declared in the artifact
   well-known/colgate-palmolive-llms-txt-served.txt:
     method: unknown
